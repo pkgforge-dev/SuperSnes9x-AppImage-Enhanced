@@ -1,25 +1,25 @@
 <div align="center">
 
-# Snes9x-AppImage-Enhanced 🐧
+# SuperSnes9x-Qt-AppImage-Enhanced 🐧
 
-[![GitHub Downloads](https://img.shields.io/github/downloads/pkgforge-dev/Snes9x-AppImage-Enhanced/total?logo=github&label=GitHub%20Downloads)](https://github.com/pkgforge-dev/Snes9x-AppImage-Enhanced/releases/latest)
-[![CI Build Status](https://github.com//pkgforge-dev/Snes9x-AppImage-Enhanced/actions/workflows/appimage.yml/badge.svg)](https://github.com/pkgforge-dev/Snes9x-AppImage-Enhanced/releases/latest)
-[![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/Snes9x-AppImage-Enhanced)](https://github.com/pkgforge-dev/Snes9x-AppImage-Enhanced/releases/latest)
+[![GitHub Downloads](https://img.shields.io/github/downloads/pkgforge-dev/SuperSnes9x-AppImage-Enhanced/total?logo=github&label=GitHub%20Downloads)](https://github.com/pkgforge-dev/SuperSnes9x-AppImage-Enhanced/releases/latest)
+[![CI Build Status](https://github.com//pkgforge-dev/SuperSnes9x-AppImage-Enhanced/actions/workflows/appimage.yml/badge.svg)](https://github.com/pkgforge-dev/SuperSnes9x-AppImage-Enhanced/releases/latest)
+[![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/SuperSnes9x-AppImage-Enhanced)](https://github.com/pkgforge-dev/SuperSnes9x-AppImage-Enhanced/releases/latest)
 
 <p align="center">
-  <img src="https://github.com/snes9xgit/snes9x/blob/master/gtk/data/snes9x_128x128.png" width="128" />
+  <img src="https://raw.githubusercontent.com/shanytc/snes9x/master/qt/src/resources/snes9x.svg" width="128" />
 </p>
 
 
 | Latest Stable Release | Latest Nightly Release | Upstream URL |
 | :---: | :---: | :---: |
-| [Click here](https://github.com/pkgforge-dev/Snes9x-AppImage-Enhanced/releases/latest) | [Click here](https://github.com/pkgforge-dev/Snes9x-AppImage-Enhanced/releases/tag/nightly) | [Click here](https://github.com/snes9xgit/snes9x) |
+| [Click here](https://github.com/pkgforge-dev/SuperSnes9x-AppImage-Enhanced/releases/latest) | [Click here](https://github.com/pkgforge-dev/SuperSnes9x-AppImage-Enhanced/releases/tag/nightly) | [Click here](https://github.com/shanytc/snes9x) |
 
 </div>
 
 ---
 
-AppImage made using [sharun](https://github.com/VHSgunzo/sharun) and its wrapper [quick-sharun](https://github.com/pkgforge-dev/Anylinux-AppImages/blob/main/useful-tools/quick-sharun.sh), which makes it extremely easy to turn any binary into a portable package reliably without using containers or similar tricks. 
+AppImage of the **SuperSnes9x Qt GUI** (the [shanytc/snes9x](https://github.com/shanytc/snes9x) fork of Snes9x, which is the recommended GUI on Linux). Built from source in the CI and packaged with [sharun](https://github.com/VHSgunzo/sharun) and its wrapper [quick-sharun](https://github.com/pkgforge-dev/Anylinux-AppImages/blob/main/useful-tools/quick-sharun.sh), which makes it extremely easy to turn any binary into a portable package reliably without using containers or similar tricks.
 
 **This AppImage bundles everything and it should work on any Linux distro, including old and musl-based ones.**
 

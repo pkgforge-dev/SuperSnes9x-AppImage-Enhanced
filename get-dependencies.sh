@@ -6,23 +6,19 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-pacman -Syu --noconfirm \
-    cairo               \
-    cmake               \
-    gdk-pixbuf2         \
-    gtkmm3              \
-    hicolor-icon-theme  \
-    intltool            \
-    libdecor            \
-    libepoxy            \
-    libxv               \
-    meson               \
-    minizip             \
-    nasm                \
-    pipewire-audio      \
-    pipewire-jack       \
-    portaudio           \
-    sdl2
+pacman -S --noconfirm --needed \
+	alsa-lib            \
+	cmake               \
+	libpng              \
+	libusb              \
+	libx11              \
+	libxext             \
+	libxkbcommon        \
+	ninja               \
+	qt6-svg             \
+	sdl3                \
+	wayland-protocols   \
+	zlib
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
@@ -32,29 +28,30 @@ get-debloated-pkgs --add-common --prefer-nano
 #make-aur-package
 
 # If the application needs to be manually built that has to be done down here
-if [ "${DEVEL_RELEASE-}" = 1 ]; then
-    echo "Making nightly build of Snes9x-GTK..."
-    echo "---------------------------------------------------------------"
-    REPO="https://github.com/snes9xgit/snes9x"
-    VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
-    git clone --recursive --depth 1 "$REPO" ./snes9x
-    echo "$VERSION" > ~/version
+echo "Building the SuperSnes9x..."
+echo "---------------------------------------------------------------"
+git clone https://github.com/shanytc/snes9x.git ./snes9x && (
+	cd ./snes9x
+	if [ "${DEVEL_RELEASE-}" = 1 ]; then
+		git rev-parse --short HEAD > ~/version
+	else
+		git fetch --tags origin
+		TAG=$(git tag --sort=-v:refname | grep -vi 'rc\|alpha' | head -1)
+		git checkout "$TAG"
+		echo "$TAG" > ~/version
+	fi
 
-    cd ./snes9x/unix
-    ./configure \
-        --prefix='/usr' \
-        --enable-netplay \
-        --with-system-zip
-    make -j$(nproc)
-    cd ../gtk
-    mkdir -p build && cd build
-    cmake .. \
-        -DCMAKE_INSTALL_PREFIX=/usr \
-        -DCMAKE_C_FLAGS="-Wno-error=format-security" \
-        -DCMAKE_CXX_FLAGS="-Wno-error=format-security"
-    make -j$(nproc)
-    make install
-else
-    pacman -S --noconfirm snes9x-gtk
-    pacman -Q snes9x-gtk | awk '{print $2; exit}' > ~/version
-fi
+	git submodule update --init --recursive
+
+	# BUILD
+	cmake \
+		-G Ninja                     \
+		-S ./qt                      \
+		-B ./qt/build                \
+		-DCMAKE_BUILD_TYPE=Release   \
+		-DUSE_SYSTEM_SDL3=ON         \
+		-DCMAKE_INSTALL_PREFIX=/usr  \
+		-DCMAKE_DISABLE_PRECOMPILE_HEADERS=ON
+	cmake --build ./qt/build -j"$(nproc)"
+	cmake --install ./qt/build
+)

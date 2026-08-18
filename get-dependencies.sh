@@ -17,6 +17,7 @@ pacman -S --noconfirm --needed \
 	ninja               \
 	qt6-svg             \
 	sdl3                \
+	vulkan-headers      \
 	wayland-protocols   \
 	zlib
 

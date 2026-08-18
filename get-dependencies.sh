@@ -41,6 +41,8 @@ git clone https://github.com/shanytc/snes9x.git ./snes9x && (
 		echo "$TAG" > ~/version
 	fi
 
+	# The fork .gitmodules is missing the 'external/libco' entry!
+	git rm --cached external/libco
 	git submodule update --init --recursive
 
 	# BUILD
